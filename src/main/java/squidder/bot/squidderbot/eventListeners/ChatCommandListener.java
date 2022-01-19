@@ -5,6 +5,7 @@ import discord4j.core.object.entity.Message;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import squidder.bot.squidderbot.chatCommands.ChatCommand;
+import squidder.bot.squidderbot.parsers.ChatCommandParser;
 
 import java.util.Collection;
 
@@ -26,11 +27,11 @@ public class ChatCommandListener implements EventListener<MessageCreateEvent> {
         Message msg = event.getMessage();
         // Check if sender is not a bot
         if (msg.getAuthor().isPresent() || !msg.getAuthor().get().isBot()) {
-            // Check if the message starts with the prefix
-            if (msg.getContent().startsWith("/")) {
+            ChatCommandParser command = new ChatCommandParser(msg.getContent());
+            if (command.isCommand()) {
                 // Loop our chat commands and check if any match the message
                 for (ChatCommand availableCommands : chatCommands) {
-                    if (availableCommands.getCommand().equalsIgnoreCase(msg.getContent().substring(1))) {
+                    if (availableCommands.getCommand().equalsIgnoreCase(command.getCommand())) {
                         return availableCommands.runCommand(event);
                     }
                 }

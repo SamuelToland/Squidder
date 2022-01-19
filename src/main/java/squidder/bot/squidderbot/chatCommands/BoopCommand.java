@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 @Component
-public class PingCommand implements ChatCommand {
+public class BoopCommand implements ChatCommand {
     @Override
     public String getCommand() {
         return "boop";
