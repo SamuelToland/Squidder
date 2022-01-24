@@ -14,7 +14,7 @@ public class BoopCommand implements ChatCommand {
     }
 
     @Override
-    public Mono<Void> runCommand(MessageCreateEvent messageEvent) {
+    public Mono<Void> execute(MessageCreateEvent messageEvent) {
         return messageEvent.getMessage().getChannel()
                 .flatMap(channel -> channel.createMessage("Boooop"))
                 .then();

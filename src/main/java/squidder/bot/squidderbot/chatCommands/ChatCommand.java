@@ -6,5 +6,5 @@ import reactor.core.publisher.Mono;
 
 public interface ChatCommand {
     String getCommand();
-    Mono<Void> runCommand(MessageCreateEvent messageEvent);
+    Mono<Void> execute(MessageCreateEvent messageEvent);
 }

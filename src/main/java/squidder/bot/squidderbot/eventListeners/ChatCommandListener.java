@@ -30,9 +30,9 @@ public class ChatCommandListener implements EventListener<MessageCreateEvent> {
             ChatCommandParser command = new ChatCommandParser(msg.getContent());
             if (command.isCommand()) {
                 // Loop our chat commands and check if any match the message
-                for (ChatCommand availableCommands : chatCommands) {
-                    if (availableCommands.getCommand().equalsIgnoreCase(command.getCommand())) {
-                        return availableCommands.runCommand(event);
+                for (ChatCommand availableCommand : chatCommands) {
+                    if (availableCommand.getCommand().equalsIgnoreCase(command.getCommand())) {
+                        return availableCommand.execute(event);
                     }
                 }
             }
